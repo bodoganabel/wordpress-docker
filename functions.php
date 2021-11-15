@@ -15,30 +15,39 @@
  * Your code goes below.
  */
 
-function getActivityCard( $atts ) {
-        $a = shortcode_atts( [], $atts );
-        return (
-        '<div class= "activity-card">
-            <div class="activity-background">
-                <div class="activity-overlay">
-                    <h2 class="activity-title">' .
-                        $a['title'] . 
-                    '</h2>
-                    <p class="activity-ageGroup">'. 
-                        $a['ageGroup'] . 
-                    '</p>
-                </div>
+function torque_hello_world_shortcode( $atts ) {
+    $a = shortcode_atts( array(
+       'name' => 'world'
+    ), $atts );
+    return 'Hello ' . $a['name'] . '!';
+ }
+ add_shortcode( 'helloworld', 'torque_hello_world_shortcode' );
+
+
+
+ function getActivityCard( $atts ) {
+    return (
+        '<a class="activity-card" href="'.$atts['link'].'">
+        <div class="activity-background" style="background-image: url(\''.$atts['imgurl'].'\');">
+            <div class="activity-overlay">
+                <h2 class="activity-title">' .
+                $atts['title2'] . 
+                '</h2>
+                <p class="activity-ageGroup">'. 
+                $atts['agegroup'] . 
+                '</p>
             </div>
-            <div class="activity-detailsContainer">
-                <p class="activity-weekday">' .
-                    $a['weekday'] .
-                '<p>
-                <p class="activity-time">' . 
-                    $a['time'] .
-                '<p>
-            </div>
-        </div>'             
-        );
-     }
-    
-     add_shortcode('activityCard','getActivityCard');
+        </div>
+        <div class="activity-detailsContainer">
+            <p class="activity-weekday">' .
+                $atts['weekday'] .
+            '<p>
+            <p class="activity-time">' . 
+                $atts['time'] .
+            '<p>
+        </div>
+    </a>'
+    );
+ }
+
+ add_shortcode('activityCard','getActivityCard');
